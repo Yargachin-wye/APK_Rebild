@@ -6,18 +6,20 @@ using UnityEngine.UI;
 public class ResourceSlot : MonoBehaviour
 {
     [SerializeField] private Image _spriteRenderer;
-    [SerializeField] private Text _Text;
+    [SerializeField] private Text _text;
+    [SerializeField] private Animator _animator;
     public void RenderSprite(Sprite sprite)
     {
         _spriteRenderer.sprite = sprite;
     }
     public void RenderText(string name, string num)
     {
-        _Text.text = name;
-        _Text.text = _Text.text + "\n" + num;
+        _text.text = name;
+        _text.text = _text.text + "\n" + num;
+        _animator.SetTrigger("add");
     }
     public void ÑhangeTextColor(Color color)
     {
-        _Text.color = color;
+        _text.color = color;
     }
 }

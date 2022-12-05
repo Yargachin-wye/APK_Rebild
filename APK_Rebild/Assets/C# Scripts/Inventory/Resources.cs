@@ -6,12 +6,12 @@ public class Resources : MonoBehaviour
 {
     static Dictionary<Resource, int> resources;
     static ResourcesUI resourcesUI;
-    static Message _message;
+    static Messager _message;
     private void Awake()
     {
         resources = new Dictionary<Resource, int>();
         resourcesUI = GetComponent<ResourcesUI>();
-        _message = GetComponent<Message>();
+        _message = GetComponent<Messager>();
     }
     private void Start()
     {
