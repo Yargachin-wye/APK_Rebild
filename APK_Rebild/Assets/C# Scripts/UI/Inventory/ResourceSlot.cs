@@ -17,6 +17,7 @@ public class ResourceSlot : MonoBehaviour
         _text.text = name;
         _text.text = _text.text + "\n" + num;
         _animator.SetTrigger("add");
+        Debug.Log("RenderText");
     }
     public void ÑhangeTextColor(Color color)
     {

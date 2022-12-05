@@ -13,10 +13,10 @@ public class Messager : MonoBehaviour
 
     }
 
-    public void DoMessage(string text, Color color)
+    public void DoMessage(Dictionary<string, Color> text)
     {
         GameObject obj = Instantiate(_mainMessagePrefab, _messagesConteiner);
         MainMessage mainMessage = obj.GetComponent<MainMessage>();
-        mainMessage.Play(text, color);
+        mainMessage.Play(text);
     }
 }

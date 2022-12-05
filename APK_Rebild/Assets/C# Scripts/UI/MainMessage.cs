@@ -6,22 +6,24 @@ using UnityEngine.UI;
 
 public class MainMessage : MonoBehaviour
 {
-    [SerializeField] private Text _mainText;
     [SerializeField] private Text _bgText;
     [SerializeField] private Animator _bgAnimator;
-    [SerializeField] private Animator _mainAnimator;
-    public void Play(string text, Color color)
+    [SerializeField] private GameObject _textMainMessagePrefab;
+    public void Play(Dictionary<string, Color> text)
     {
-        _bgText.text = text;
-        _mainText.text = text;
-        _mainText.color = color;
         _bgAnimator.SetTrigger("message");
-        _mainAnimator.SetTrigger("message");
         StartCoroutine(Destroy());// такое решение принято всвязи с тем что автор не умеет согласовывать две анимации
+        _bgText.text = "";
+        foreach (var line in text)
+        {
+            _bgText.text = _bgText.text + line.Key + "\n";
+            GameObject obj = Instantiate(_textMainMessagePrefab, transform);
+            obj.GetComponent<TextMainMessage>().Play(line.Key, line.Value);
+        }
     }
     private IEnumerator Destroy()
     {
-        yield return new WaitForSeconds(1);// КОНСТАНТА
+        yield return new WaitForSeconds(1);// ДЛИННА АНИМАЦИИ НЕ БОЛЬШЕ СЕКУНДЫ!!!!!!!
         Destroy(this.gameObject);
     }
 }

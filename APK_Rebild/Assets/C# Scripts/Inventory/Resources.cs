@@ -29,8 +29,17 @@ public class Resources : MonoBehaviour
         }
         resourcesUI.UpdateSlot(res, resources[res]);
     }
-    public static bool TryRemoveResource(Resource res, int number)
+    public static bool TryRemoveResource(Dictionary<Resource, int> ress)
     {
+        string[ma]
+        foreach(var res in ress)
+        {
+            if (!resources.ContainsKey(res.Key))
+            {
+
+            }
+        }
+
         if (!resources.ContainsKey(res))
         {
             _message.DoMessage("you need " + number.ToString() + " " + res.name, res.color);
