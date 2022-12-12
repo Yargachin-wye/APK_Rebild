@@ -9,6 +9,7 @@ public class MainMessage : MonoBehaviour
     [SerializeField] private Text _bgText;
     [SerializeField] private Animator _bgAnimator;
     [SerializeField] private GameObject _textMainMessagePrefab;
+    [SerializeField] private Transform _mainTextConteiner;
     public void Play(Dictionary<string, Color> text)
     {
         _bgAnimator.SetTrigger("message");
@@ -17,7 +18,7 @@ public class MainMessage : MonoBehaviour
         foreach (var line in text)
         {
             _bgText.text = _bgText.text + line.Key + "\n";
-            GameObject obj = Instantiate(_textMainMessagePrefab, transform);
+            GameObject obj = Instantiate(_textMainMessagePrefab, _mainTextConteiner);
             obj.GetComponent<TextMainMessage>().Play(line.Key, line.Value);
         }
     }

@@ -6,12 +6,12 @@ public class Resources : MonoBehaviour
 {
     static Dictionary<Resource, int> resources;
     static ResourcesUI resourcesUI;
-    static Messager _message;
+    static Messager _messager;
     private void Awake()
     {
         resources = new Dictionary<Resource, int>();
         resourcesUI = GetComponent<ResourcesUI>();
-        _message = GetComponent<Messager>();
+        _messager = GetComponent<Messager>();
     }
     private void Start()
     {
@@ -31,27 +31,28 @@ public class Resources : MonoBehaviour
     }
     public static bool TryRemoveResource(Dictionary<Resource, int> ress)
     {
-        string[ma]
+        Dictionary<string,Color> text = new Dictionary<string, Color>();
         foreach(var res in ress)
         {
             if (!resources.ContainsKey(res.Key))
             {
-
+                text.Add("you need " + res.Value.ToString() + " " + res.Key.name, res.Key.color);
+            }
+            else if(resources[res.Key] < res.Value)
+            {
+                text.Add("you need + " + (res.Value - resources[res.Key]).ToString() + " " + res.Key.name, res.Key.color);
             }
         }
-
-        if (!resources.ContainsKey(res))
+        if(text.Count < 1)
         {
-            _message.DoMessage("you need " + number.ToString() + " " + res.name, res.color);
-            return false;
+            foreach (var res in ress)
+            {
+                resources[res.Key] -= res.Value;
+                resourcesUI.UpdateSlot(res.Key, resources[res.Key]);
+            }
+            return true;
         }
-        else if (resources.ContainsKey(res) && resources[res] < number)
-        {
-            _message.DoMessage("you need + " + (number - resources[res]).ToString() + " " + res.name, res.color);
-            return false;
-        }
-        resources[res] -= number;
-        resourcesUI.UpdateSlot(res, resources[res]);
-        return true;
+        _messager.DoMessage(text);
+        return false;
     }
 }

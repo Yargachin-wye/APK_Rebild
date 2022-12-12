@@ -15,6 +15,8 @@ public class Messager : MonoBehaviour
 
     public void DoMessage(Dictionary<string, Color> text)
     {
+        if (text.Count < 1)
+            return;
         GameObject obj = Instantiate(_mainMessagePrefab, _messagesConteiner);
         MainMessage mainMessage = obj.GetComponent<MainMessage>();
         mainMessage.Play(text);

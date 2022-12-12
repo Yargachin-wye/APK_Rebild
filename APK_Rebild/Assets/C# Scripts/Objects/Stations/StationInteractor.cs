@@ -5,9 +5,10 @@ using UnityEngine.Events;
 
 public class StationInteractor : MonoBehaviour
 {
-    [SerializeField]private UnityEvent _functionInteract;
+    [SerializeField] private UnityEvent _functionInteract;
     public void Interact()
     {
         _functionInteract?.Invoke();
+
     }
 }
